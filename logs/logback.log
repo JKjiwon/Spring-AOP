@@ -1,0 +1,15 @@
+[2021-03-25 21:47:25:5736][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 21:47:25:5737][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 21:47:35:16515][http-nio-8080-exec-2] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 21:47:35:16516][http-nio-8080-exec-2] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 21:47:36:17012][http-nio-8080-exec-3] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 21:47:36:17012][http-nio-8080-exec-3] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 21:47:36:17465][http-nio-8080-exec-4] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 21:47:36:17465][http-nio-8080-exec-4] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 21:52:08:4799][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 21:52:08:4799][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 22:57:06:60713][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 22:57:06:60721][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 22:58:42:156551][http-nio-8080-exec-3] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
+[2021-03-25 22:58:42:156552][http-nio-8080-exec-3] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.save() => 필드 : username, 메시지 : 유저 네임을 입력하세요.
+[2021-03-25 23:01:56:12493][http-nio-8080-exec-1] WARN  c.cos.restapi.config.BindingAdvice - com.cos.restapi.web.UserController.update() => 필드 : password, 메시지 : 비밀번호가 너무 짧습니다. (4자 이상)
