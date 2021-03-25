@@ -1,6 +1,6 @@
 package com.cos.restapi.domain;
 
-import com.cos.restapi.config.DatabaseNotFoundException;
+import com.cos.restapi.config.UserNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class UserRepository {
 
     public User findById(int id) {
         if(store.get(id) == null){
-            throw new DatabaseNotFoundException("해당 유저를 찾을 수 없습니다.");
+            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
         }
         return store.get(id);
     }
@@ -42,7 +42,7 @@ public class UserRepository {
 
     public void deleteById(int id) {
         if(store.get(id) == null){
-            throw new DatabaseNotFoundException("해당 유저를 찾을 수 없습니다.");
+            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
         }
         store.remove(id);
     }

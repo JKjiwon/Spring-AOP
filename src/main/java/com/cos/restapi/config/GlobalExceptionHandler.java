@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(value = DatabaseNotFoundException.class)
-    public ResponseDto<String> handleDatabaseNotFoundException(DatabaseNotFoundException e) {
+    @ExceptionHandler(value = UserNotFoundException.class)
+    public ResponseDto<String> handleDatabaseNotFoundException(UserNotFoundException e) {
         return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 }
