@@ -9,8 +9,8 @@ import com.cos.restapi.web.dto.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -19,49 +19,53 @@ public class UserService {
     private final UserRepository userRepository;
 
     public Long joinUser(UserJoinRequestDto userJoinRequestDto) {
-        System.out.println(userJoinRequestDto);
-        System.out.println(userJoinRequestDto.toEntity());
         return userRepository.save(userJoinRequestDto.toEntity()).getId();
     }
 
 
     public Long updateUser(Long id, UserUpdateRequestDto updateReqDto) {
-        User user = userRepository.findById(id);
-
-        // 해당 유저를 찾을 수 없으면
-        if (user == null) {
-            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
-        }
+        User user = userRepository.findById2(id)
+                .orElseThrow(() -> new UserNotFoundException("해당 유저를 찾을 수 없습니다."));
         user.update(updateReqDto.getPassword(), updateReqDto.getPhone());
         return userRepository.save(user).getId();
     }
 
 
-    public UserResponseDto findUser(Long id) {
-        User entity = userRepository.findById(id);
-        if (entity == null) {
-            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
-        }
+//    public UserResponseDto findUser(Long id) {
+//        User entity = userRepository.findById(id);
+//        if (entity == null) {
+//            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
+//        }
+//        return new UserResponseDto(entity);
+//    }
+
+    public UserResponseDto findUser2(Long id) {
+        User entity = userRepository.findById2(id)
+                .orElseThrow(() -> new UserNotFoundException("해당 유저를 찾을 수 없습니다."));
         return new UserResponseDto(entity);
     }
 
 
-    public List<UserResponseDto> findAllUsers() {
-        List<User> userList = userRepository.findAll();
-        List<UserResponseDto> userResponseDtoList = new ArrayList<>();
+//    public List<UserResponseDto> findAllUsers() {
+//        List<User> userList = userRepository.findAll();
+//        List<UserResponseDto> userResponseDtoList = new ArrayList<>();
+//
+//        for (User user : userList) {
+//            userResponseDtoList.add(new UserResponseDto(user));
+//        }
+//        return userResponseDtoList;
+//    }
 
-        for (User user : userList) {
-            userResponseDtoList.add(new UserResponseDto(user));
-        }
-        return userResponseDtoList;
+    public List<UserResponseDto> findAllUsers2() {
+        return userRepository.findAll().stream()
+                .map(UserResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id);
-        if (user == null) {
-            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
-        }
+        User user = userRepository.findById2(id)
+                .orElseThrow(() -> new UserNotFoundException("해당 유저를 찾을 수 없습니다."));
         userRepository.deleteById(id);
     }
 }

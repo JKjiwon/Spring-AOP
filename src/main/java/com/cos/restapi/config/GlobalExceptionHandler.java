@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = UserNotFoundException.class)
     public ResponseDto<String> handleUserNotFoundException(UserNotFoundException e) {
+        // Sentry.io 에 로그 남기기
         Sentry.captureException(e);
         return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }

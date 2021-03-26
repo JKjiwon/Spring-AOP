@@ -2,7 +2,6 @@ package com.cos.restapi.config;
 
 
 import com.cos.restapi.web.dto.ResponseDto;
-import io.sentry.Sentry;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -43,7 +42,8 @@ public class BindingAdvice {
                         // 로그 레벨 error, warn, info, debug
                         log.warn(type + "." + method + "() => 필드 : " + error.getField() + ", 메시지 : " + error.getDefaultMessage());
                         log.debug(type + "." + method + "() => 필드 : " + error.getField() + ", 메시지 : " + error.getDefaultMessage());
-                        Sentry.captureMessage(type + "." + method + "() => 필드 : " + error.getField() + ", 메시지 : " + error.getDefaultMessage());
+                        // Sentry.io 에 로그 남기기
+//                        Sentry.captureMessage(type + "." + method + "() => 필드 : " + error.getField() + ", 메시지 : " + error.getDefaultMessage());
                     }
                     return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), errMap);
                 }

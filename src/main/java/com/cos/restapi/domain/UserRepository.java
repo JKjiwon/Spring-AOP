@@ -2,10 +2,7 @@ package com.cos.restapi.domain;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class UserRepository {
@@ -17,8 +14,13 @@ public class UserRepository {
         return new ArrayList<>(store.values());
     }
 
+
     public User findById(Long id) {
         return store.get(id);
+    }
+
+    public Optional<User> findById2(Long id) {
+        return Optional.ofNullable(store.get(id));
     }
 
     public User save(User user) {

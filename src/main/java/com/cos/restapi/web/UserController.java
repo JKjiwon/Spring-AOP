@@ -18,17 +18,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    //    public final UserRepository userRepository;
     public final UserService userService;
 
     @GetMapping("/user")
     public ResponseDto<List<UserResponseDto>> findAllUsers() {
-        return new ResponseDto<>(HttpStatus.OK.value(), userService.findAllUsers()); // MessageConverter (javaObject -> json)
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.findAllUsers2()); // MessageConverter (javaObject -> json)
     }
 
     @GetMapping("/user/{id}")
     public ResponseDto<UserResponseDto> findUser(@PathVariable Long id) {
-        return new ResponseDto<>(HttpStatus.OK.value(), userService.findUser(id));
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.findUser2(id));
     }
 
     // x--www-form-urlencoded -> request.getParameter()
@@ -36,10 +35,10 @@ public class UserController {
     // application/json => @RequestBody 어노테이션 + 오브젝트로 받기
     @CrossOrigin
     @PostMapping("/user")
-    public ResponseDto<Long> joinUser(@Valid @RequestBody UserJoinRequestDto userJoinRequestDto, BindingResult bindingResult) {
+    public ResponseDto<String> joinUser(@Valid @RequestBody UserJoinRequestDto userJoinRequestDto, BindingResult bindingResult) {
         // Validation 로직 => AOP로 처리
         // 저장 로직
-        return new ResponseDto<>(HttpStatus.OK.value(), userService.joinUser(userJoinRequestDto));
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.joinUser(userJoinRequestDto)+"번 유저가 생성되었습니다.");
     }
 
     @DeleteMapping("/user/{id}")
