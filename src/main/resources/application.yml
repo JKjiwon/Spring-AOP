@@ -1,4 +1,2 @@
-
 sentry:
-  dsn:
-
+  dsn: "sentry.io 에서 받아오기"

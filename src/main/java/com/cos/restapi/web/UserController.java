@@ -1,32 +1,34 @@
 package com.cos.restapi.web;
 
 
-import com.cos.restapi.domain.*;
+import com.cos.restapi.service.UserService;
+import com.cos.restapi.web.dto.ResponseDto;
+import com.cos.restapi.web.dto.UserJoinRequestDto;
+import com.cos.restapi.web.dto.UserResponseDto;
+import com.cos.restapi.web.dto.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
-    public final UserRepository userRepository;
+    //    public final UserRepository userRepository;
+    public final UserService userService;
 
     @GetMapping("/user")
-    public ResponseDto<List<User>> findAll() {
-        return new ResponseDto<>(HttpStatus.OK.value(), userRepository.findAll()); // MessageConverter (javaObject -> json)
+    public ResponseDto<List<UserResponseDto>> findAllUsers() {
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.findAllUsers()); // MessageConverter (javaObject -> json)
     }
 
     @GetMapping("/user/{id}")
-    public ResponseDto<User> findById(@PathVariable int id) {
-        return new ResponseDto<>(HttpStatus.OK.value(), userRepository.findById(id));
+    public ResponseDto<UserResponseDto> findUser(@PathVariable Long id) {
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.findUser(id));
     }
 
     // x--www-form-urlencoded -> request.getParameter()
@@ -34,47 +36,24 @@ public class UserController {
     // application/json => @RequestBody 어노테이션 + 오브젝트로 받기
     @CrossOrigin
     @PostMapping("/user")
-    public ResponseDto<User> save(@Valid @RequestBody JoinReqDto joinReqDto, BindingResult bindingResult) {
+    public ResponseDto<Long> joinUser(@Valid @RequestBody UserJoinRequestDto userJoinRequestDto, BindingResult bindingResult) {
         // Validation 로직 => AOP로 처리
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> errMap = new HashMap<>();
-//            for (FieldError error : bindingResult.getFieldErrors()) {
-//                errMap.put(error.getField(), error.getDefaultMessage());
-//            }
-//            return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), errMap);
-//        }
-        System.out.println("UserController.save");
         // 저장 로직
-        User user = new User();
-        user.setUsername(joinReqDto.getUsername());
-        user.setPassword(joinReqDto.getPassword());
-        user.setPhone(joinReqDto.getPhone());
-        User savedUser = userRepository.save(user);
-        return new ResponseDto<>(HttpStatus.OK.value(), savedUser);
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.joinUser(userJoinRequestDto));
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseDto<String> delete(@PathVariable int id) {
-        userRepository.deleteById(id);
+    public ResponseDto<String> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
         return new ResponseDto<>(HttpStatus.OK.value(), id + "번 유저가 삭제되었습니다.");
     }
 
     @PutMapping("/user/{id}")
-    public ResponseDto<User> update(@PathVariable int id, @Valid @RequestBody UpdateReqDto updateReqDto, BindingResult bindingResult) {
-
+    public ResponseDto<String> updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequestDto updateReqDto, BindingResult bindingResult) {
         // Validation 로직 => AOP로 처리
 
         // 업데이트 로직
-        User user = userRepository.findById(id);
-
-        if (updateReqDto.getPassword() != null) {
-            user.setPassword(updateReqDto.getPassword());
-        }
-        if (updateReqDto.getPhone() != null) {
-            user.setPhone(updateReqDto.getPhone());
-        }
-        User updatedUser = userRepository.save(user);
-
-        return new ResponseDto<>(HttpStatus.OK.value(), updatedUser);
+        return new ResponseDto<>(HttpStatus.OK.value(),
+                userService.updateUser(id, updateReqDto) + "번 유저가 업데이트 되었습니다.");
     }
 }

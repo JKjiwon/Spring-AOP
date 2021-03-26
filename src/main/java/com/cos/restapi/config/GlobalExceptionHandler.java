@@ -1,6 +1,6 @@
 package com.cos.restapi.config;
 
-import com.cos.restapi.domain.ResponseDto;
+import com.cos.restapi.web.dto.ResponseDto;
 import io.sentry.Sentry;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = UserNotFoundException.class)
-    public ResponseDto<String> handleDatabaseNotFoundException(UserNotFoundException e) {
+    public ResponseDto<String> handleUserNotFoundException(UserNotFoundException e) {
         Sentry.captureException(e);
         return new ResponseDto<>(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }

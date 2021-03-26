@@ -1,8 +1,8 @@
-package com.cos.restapi.domain;
+package com.cos.restapi.web.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class ResponseDto<T> {
     private int statusCode;
     private T data;
