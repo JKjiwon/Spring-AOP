@@ -24,39 +24,19 @@ public class UserService {
 
 
     public Long updateUser(Long id, UserUpdateRequestDto updateReqDto) {
-        User user = userRepository.findById2(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("해당 유저를 찾을 수 없습니다."));
         user.update(updateReqDto.getPassword(), updateReqDto.getPhone());
-        return userRepository.save(user).getId();
+        return user.getId();
     }
 
-
-//    public UserResponseDto findUser(Long id) {
-//        User entity = userRepository.findById(id);
-//        if (entity == null) {
-//            throw new UserNotFoundException("해당 유저를 찾을 수 없습니다.");
-//        }
-//        return new UserResponseDto(entity);
-//    }
-
-    public UserResponseDto findUser2(Long id) {
-        User entity = userRepository.findById2(id)
+    public UserResponseDto findUser(Long id) {
+        User entity = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("해당 유저를 찾을 수 없습니다."));
         return new UserResponseDto(entity);
     }
 
-
-//    public List<UserResponseDto> findAllUsers() {
-//        List<User> userList = userRepository.findAll();
-//        List<UserResponseDto> userResponseDtoList = new ArrayList<>();
-//
-//        for (User user : userList) {
-//            userResponseDtoList.add(new UserResponseDto(user));
-//        }
-//        return userResponseDtoList;
-//    }
-
-    public List<UserResponseDto> findAllUsers2() {
+    public List<UserResponseDto> findAllUsers() {
         return userRepository.findAll().stream()
                 .map(UserResponseDto::new)
                 .collect(Collectors.toList());
@@ -64,7 +44,7 @@ public class UserService {
 
 
     public void deleteUser(Long id) {
-        User user = userRepository.findById2(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("해당 유저를 찾을 수 없습니다."));
         userRepository.deleteById(id);
     }

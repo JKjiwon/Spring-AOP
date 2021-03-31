@@ -22,12 +22,12 @@ public class UserController {
 
     @GetMapping("/user")
     public ResponseDto<List<UserResponseDto>> findAllUsers() {
-        return new ResponseDto<>(HttpStatus.OK.value(), userService.findAllUsers2()); // MessageConverter (javaObject -> json)
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.findAllUsers()); // MessageConverter (javaObject -> json)
     }
 
     @GetMapping("/user/{id}")
     public ResponseDto<UserResponseDto> findUser(@PathVariable Long id) {
-        return new ResponseDto<>(HttpStatus.OK.value(), userService.findUser2(id));
+        return new ResponseDto<>(HttpStatus.OK.value(), userService.findUser(id));
     }
 
     // x--www-form-urlencoded -> request.getParameter()

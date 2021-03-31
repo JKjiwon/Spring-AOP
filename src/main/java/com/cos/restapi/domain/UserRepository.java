@@ -15,25 +15,15 @@ public class UserRepository {
     }
 
 
-    public User findById(Long id) {
-        return store.get(id);
-    }
-
-    public Optional<User> findById2(Long id) {
+    public Optional<User> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
     public User save(User user) {
-        if (user.getId() == null) {
-            //  저장
-            System.out.println("UserRepository.save");
-            user.giveDatabaseId(++userId);
-            System.out.println(user);
-            store.put(user.getId(), user);
-        } else {
-            // 업데이트
-            System.out.println("UserRepository.update");
-        }
+        //  저장
+        System.out.println("UserRepository.save");
+        user.giveDatabaseId(++userId);
+        store.put(user.getId(), user);
         return user;
     }
 
