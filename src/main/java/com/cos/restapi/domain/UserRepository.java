@@ -33,9 +33,6 @@ public class UserRepository {
         } else {
             // 업데이트
             System.out.println("UserRepository.update");
-            userId = user.getId();
-            store.remove(userId);
-            store.put(userId, user);
         }
         return user;
     }
